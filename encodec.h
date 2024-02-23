@@ -167,8 +167,9 @@ struct encodec_context {
     // buffer for model evaluation
     ggml_backend_buffer_t buf_compute;
 
-    // custom allocrator
-    struct ggml_allocr * allocr = NULL;
+    // custom allocator
+    struct ggml_gallocr * gallocr = NULL;
+    struct ggml_tallocr * tallocr = NULL;
 
     // intermediate steps
     struct ggml_tensor * encoded = NULL;  // Encoded audio
