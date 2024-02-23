@@ -4,6 +4,12 @@ main.dSYM
 encodec
 *.o
 *.th
-.vscode/
 
 build/
+
+# VSCode
+.vscode/
+
+# CLion
+.idea/
+cmake-build-**/
