@@ -1373,6 +1373,14 @@ void encodec_free(struct encodec_context * ectx) {
         return;
     }
 
+    if (ectx->gallocr) {
+        ggml_gallocr_free(ectx->gallocr);
+    }
+
+    if (ectx->tallocr) {
+        ggml_tallocr_free(ectx->tallocr);
+    }
+
     if (ectx->model.ctx) {
         ggml_free(ectx->model.ctx);
     }
