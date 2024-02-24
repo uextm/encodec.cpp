@@ -1052,7 +1052,7 @@ struct ggml_cgraph * encodec_build_graph(
 
     struct ggml_context * ctx0 = ggml_init(ggml_params);
 
-    struct ggml_cgraph * gf = ggml_new_graph(ctx0);
+    struct ggml_cgraph * gf = ggml_new_graph_custom(ctx0, 72000, false);
 
     const int N = inp_audio.size();
 
@@ -1133,7 +1133,7 @@ struct ggml_cgraph * encodec_build_graph(
 
     struct ggml_context * ctx0 = ggml_init(ggml_params);
 
-    struct ggml_cgraph * gf = ggml_new_graph(ctx0);
+    struct ggml_cgraph * gf = ggml_new_graph_custom(ctx0, 72000, false);
 
     struct ggml_tensor * inp_codes = ggml_new_tensor_2d(ctx0, GGML_TYPE_I32, N, n_q);
     ggml_tallocr_alloc(tallocr, inp_codes);
