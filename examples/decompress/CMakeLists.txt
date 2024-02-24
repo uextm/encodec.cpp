@@ -1,4 +1,6 @@
 set(TARGET decompress)
 add_executable(${TARGET} main.cpp)
-target_link_libraries(${TARGET} PRIVATE encodec common)
+target_include_directories(${TARGET} PUBLIC ../../)
+target_include_directories(${TARGET} PUBLIC ../../ggml/include/ggml)
+target_link_libraries(${TARGET} PRIVATE ${ENCODEC_STATIC_LIB} ${GGML_STATIC_LIB} common)
 target_compile_features(${TARGET} PRIVATE cxx_std_11)
