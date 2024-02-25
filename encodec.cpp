@@ -1226,9 +1226,6 @@ bool encodec_eval(
             const encodec_run_mode   mode) {
     const int64_t t_start_ms = ggml_time_ms();
 
-    // allocate the compute buffer
-    ectx->gallocr = ggml_gallocr_new(ggml_backend_cpu_buffer_type());
-
     // encodec eval
     if (!encodec_eval_internal(ectx, raw_audio, n_threads, mode)) {
         fprintf(stderr, "%s: failed to run encodec eval\n", __func__);
@@ -1246,9 +1243,6 @@ bool encodec_eval(
                          const int   n_threads,
             const encodec_run_mode   mode) {
     const int64_t t_start_ms = ggml_time_ms();
-
-    // allocate the compute buffer
-    ectx->gallocr = ggml_gallocr_new(ggml_backend_cpu_buffer_type());
 
     // encodec eval
     if (!encodec_eval_internal(ectx, codes, n_threads, mode)) {
@@ -1364,6 +1358,10 @@ struct encodec_context * encodec_load_model(const std::string & model_path, int 
     fprintf(stderr, "%s: n_q = %d\n", __func__, ectx->model.hparams.n_q);
 
     ectx->t_load_us = ggml_time_us() - t_start_load_us;
+
+    ectx->gallocr = ggml_gallocr_new(ggml_backend_cpu_buffer_type());
+
+    ectx->tallocr = ggml_tallocr_new(ectx->model.buffer_w);
 
     return ectx;
 }
